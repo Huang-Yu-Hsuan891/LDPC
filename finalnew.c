@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-unsigned long long SEED = 32891; // have value
+unsigned long long SEED = 3189991; // have value
 //unsigned long long SEED = 3881111387891;
 unsigned long long RANV;
 int RANI = 0;
@@ -107,7 +107,7 @@ int main() {
         }
     }
     fclose(fpr);
-    for(step = 0; step < 6; step++) {
+    for(step = 1; step < 2; step++) {
         s = 0;
         num = 0;
         totalerror = 0; 
@@ -155,8 +155,8 @@ int main() {
         //printf("Lj[i] = \n");
         ebn0 = pow(10, ebn0/10);
         for(i = 0; i < 816; i++) {
-            //Lj[i] = (log(408) / log(2)) * 4 * 0.5 * ebn0 * outp[i];
-            Lj[i] =   4 * 0.5 * ebn0 * outp[i];     //  0.5 * 1.2544 = Es/N0
+            Lj[i] =  4 * 0.5 * ebn0 * outp[i];
+            //Lj[i] =   4 * 0.5 * ebn0 * outp[i];     //  0.5 * 1.2544 = Es/N0
             //printf("%g ", Lj[i]);
         }
         //printf("\n");
@@ -253,12 +253,12 @@ int main() {
             }
             stp = 0;
             if (k == 99 && restart != 408) {
-                //printf("failure\n");
+                printf("failure\n");
                 stp = 1;
                 s++;
             }
         }
-        //printf("k[%d] = %d\n", num, k);
+        printf("k[%d] = %d\n", num, k);
         error = 0;
         for(i = 0; i < 816; i++) {
             if (output[i] != cod[i]) {
@@ -270,7 +270,7 @@ int main() {
         restart = 0;
         //printf("error = %d\n", error);       
         totalerror += error;
-        if(num > 25000) break;
+        if(num > 10000) break;
         printf("totalerror[%d] = %d\n", num, totalerror);
     }
     double ber;
@@ -288,7 +288,7 @@ int main() {
 
     FILE *outfp;
     
-    outfp = fopen("result3.txt","w");
+    outfp = fopen("tryresult.txt","w");
     for (i = 0; i < 6; i++) {
          fprintf(outfp,"%g ",ebn0s[i]);
          fprintf(outfp,"%g ",berscompare[i]);
